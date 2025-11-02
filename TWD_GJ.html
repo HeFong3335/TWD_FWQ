@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWD官方教程</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        /* 页面整体样式 */
+        body {
+            background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+            color: #f5f7fa;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 固定导航栏样式 */
+        .导航栏 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        /* 导航栏滚动效果 */
+        .导航栏.滚动 {
+            background: rgba(26, 42, 58, 0.95);
+            padding: 10px 0;
+        }
+        
+        /* 导航栏容器 */
+        .导航容器 {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        /* 网站标志样式 */
+        .标志 {
+            font-size: 26px;
+            font-weight: bold;
+            color: #3498db;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+            display: flex;
+            align-items: center;
+        }
+        
+        /* 标志前的猫图标 */
+        .标志::before {
+            content: "🐱";
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        /* 导航链接列表 */
+        .导航链接 {
+            display: flex;
+            list-style: none;
+        }
+        
+        /* 导航链接项 */
+        .导航链接 li {
+            margin-left: 25px;
+            position: relative;
+        }
+        
+        /* 导航链接样式 */
+        .导航链接 a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        /* 导航链接悬停效果 */
+        .导航链接 a:hover {
+            color: #3498db;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 导航链接下划线 */
+        .导航链接 a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10px;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            transition: width 0.3s;
+        }
+        
+        /* 悬停时显示下划线 */
+        .导航链接 a:hover::after {
+            width: calc(100% - 20px);
+        }
+        
+        /* 移动菜单按钮 */
+        .移动菜单按钮 {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* 主要内容区域 */
+        .主要内容 {
+            margin-top: 70px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+      
+        /* 页脚样式 */
+        .页脚 {
+            background: rgba(26, 42, 58, 0.9);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 页脚段落样式 */
+        .页脚 p {
+            margin-bottom: 10px;
+        }
+        
+        /* 页脚链接容器 */
+        .页脚链接 {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        /* 页脚链接项 */
+        .页脚链接 li {
+            margin: 0 15px;
+        }
+        
+        /* 页脚链接样式 */
+        .页脚链接 a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        /* 页脚链接悬停效果 */
+        .页脚链接 a:hover {
+            color: #3498db;
+        }
+        
+        /* 响应式设计 - 平板和手机 */
+        @media (max-width: 768px) {
+            /* 导航链接在小屏幕上默认隐藏 */
+            .导航链接 {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(44, 62, 80, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* 激活状态的导航链接 */
+            .导航链接.激活 {
+                display: flex;
+            }
+            
+            /* 导航链接项在小屏幕上的间距 */
+            .导航链接 li {
+                margin: 10px 0;
+                margin-left: 0;
+            }
+            
+            /* 主要内容区域在小屏幕上的调整 */
+            .主要内容 {
+                padding: 15px;
+            }
+            
+
+        }
+    </style>
+</head>
+<body>
+    <!-- 固定导航栏 -->
+    <nav class="导航栏">
+        <div class="导航容器">
+            <div class="标志">TWD服务器</div>
+            <ul class="导航链接">
+                <li><a href="TWDAI.HTML">首页</a></li>
+                <li><a href="TWD-教程.html">教程</a></li>
+                <li><a href="TWD-工具.html">工具</a></li>
+                <li><a href="TWD-资源.html">资源下载</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+            <button class="移动菜单按钮">☰</button>
+        </div>
+    </nav>
+    
+    <!-- 主要内容区域 -->
+    <div class="主要内容">
+
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="页脚">
+        <p>&copy; 2025 TWD官方网页 版权所有</p>
+        <p>致力于为玩家提供最好的Minecraft体验</p>
+        <ul class="页脚链接">
+            <li><a href="#">隐私政策</a></li>
+            <li><a href="#">使用条款</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">友情链接</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.querySelector('.移动菜单按钮').addEventListener('click', function() {
+            const 导航链接 = document.querySelector('.导航链接');
+            导航链接.classList.toggle('激活');
+        });
+        
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const 导航栏 = document.querySelector('.导航栏');
+            if (window.scrollY > 50) {
+                导航栏.classList.add('滚动');
+            } else {
+                导航栏.classList.remove('滚动');
+            }
+        });
+        
+        // 点击页面其他区域关闭移动端菜单
+        document.addEventListener('click', function(event) {
+            const 导航链接 = document.querySelector('.导航链接');
+            const 移动菜单按钮 = document.querySelector('.移动菜单按钮');
+            
+            if (!导航链接.contains(event.target) && !移动菜单按钮.contains(event.target) && 导航链接.classList.contains('激活')) {
+                导航链接.classList.remove('激活');
+            }
+        });
+    </script>
+</body>
+</html>
