@@ -134,10 +134,487 @@
             padding: 20px;
             min-height: 60vh;
             display: flex;
+            gap: 30px;
+        }
+        
+        /* 主内容区域容器 */
+        .主内容区 {
+            flex: 1;
+        }
+        
+        /* 右侧信息展示区（侧边栏） */
+        .右侧信息区 {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* 信息卡片通用样式 */
+        .信息卡片 {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .信息卡片:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* 时间信息显示区 */
+        .时间信息区 {
+            text-align: center;
+            padding: 15px 0;
+        }
+        
+        .时间信息区 h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .当前时间 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f5f7fa;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        
+        .日期信息 {
+            color: #bdc3c7;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* 标题展示区 */
+        .标题展示区 {
             text-align: center;
+            padding: 25px 15px;
+        }
+        
+        .标题展示区 h2 {
+            color: #3498db;
+            font-size: 22px;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .标题展示区 p {
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        /* 装饰图片区域 */
+        .装饰图片区域 {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .装饰图片区域 img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        
+        .装饰图片区域:hover img {
+            transform: scale(1.05);
+        }
+        
+        .装饰图片区域::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.2), rgba(155, 89, 182, 0.2));
+            pointer-events: none;
+            border-radius: 8px;
+        }
+        
+        /* 响应式设计 - 平板和手机 */
+        @media (max-width: 1024px) {
+            .右侧信息区 {
+                width: 260px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .主要内容 {
+                flex-direction: column;
+            }
+            
+            .右侧信息区 {
+                width: 100%;
+                order: -1;
+            }
+            
+            .装饰图片区域 img {
+                max-height: 200px;
+                object-fit: cover;
+            }
+        }
+        
+        /* 资源导航容器 */
+        .资源导航容器 {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        /* 资源导航栏 */
+        .资源导航 {
+            display: flex;
+            overflow-x: auto;
+            padding: 5px;
+            gap: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(52, 152, 219, 0.5) rgba(255, 255, 255, 0.05);
+        }
+        
+        /* 滚动条样式 */
+        .资源导航::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .资源导航::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+        
+        .资源导航::-webkit-scrollbar-thumb {
+            background: rgba(52, 152, 219, 0.5);
+            border-radius: 3px;
+        }
+        
+        .资源导航::-webkit-scrollbar-thumb:hover {
+            background: rgba(52, 152, 219, 0.7);
+        }
+        
+        /* 资源选项卡按钮 */
+        .资源选项卡 {
+            background: transparent;
+            color: #bdc3c7;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            position: relative;
+            outline: none;
+        }
+        
+        /* 选项卡悬停效果 */
+        .资源选项卡:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #f5f7fa;
+        }
+        
+        /* 活动选项卡样式 */
+        .资源选项卡.活动 {
+            background: rgba(52, 152, 219, 0.15);
+            color: #3498db;
+            font-weight: 500;
+        }
+        
+        /* 活动选项卡下划线 */
+        .资源选项卡.活动::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: #3498db;
+            border-radius: 3px;
+        }
+        
+        /* 资源内容区域 */
+        .资源内容 {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* 选项卡内容（默认隐藏） */
+        .选项卡内容 {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* 活动内容显示 */
+        .选项卡内容.活动 {
+            display: block;
+        }
+        
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 资源标题 */
+        .资源标题 {
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+        
+        .资源标题 h2 {
+            color: #3498db;
+            margin-bottom: 10px;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .资源标题 p {
+            color: #bdc3c7;
+            font-size: 16px;
+        }
+        
+        /* 资源列表 */
+        .资源列表 {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* 资源项目 */
+        .资源项目 {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+        
+        /* 推荐资源项目 */
+        .资源项目.推荐 {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+        
+        /* 推荐标签 */
+        .推荐标签 {
+            position: absolute;
+            top: 15px;
+            right: -40px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        /* 资源项目悬停效果 */
+        .资源项目:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* 资源信息 */
+        .资源信息 {
+            flex: 1;
+            padding-right: 20px;
+        }
+        
+        .资源信息 h3 {
+            color: #f5f7fa;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        
+        .资源信息 p {
+            color: #bdc3c7;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        /* 资源元数据 */
+        .资源元数据 {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .资源元数据 span {
+            color: #95a5a6;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* 资源操作按钮组 */
+        .资源操作 {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        
+        /* 嵌入式页面样式 */
+        .嵌入式页面 {
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .嵌入内容 {
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .嵌入内容 iframe {
+            border-radius: 6px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .嵌入内容 iframe:hover {
+            opacity: 0.95;
+        }
+        
+        /* 下载按钮 */
+        .下载按钮 {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .下载按钮:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .下载按钮:active {
+            transform: translateY(0);
+        }
+        
+        /* 查看详情按钮 */
+        .查看详情按钮 {
+            background: transparent;
+            color: #3498db;
+            border: 1px solid #3498db;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .查看详情按钮:hover {
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .查看详情按钮:active {
+            transform: translateY(0);
+        }
+        
+        /* 响应式设计 - 平板和手机 */
+        @media (max-width: 768px) {
+            .资源项目 {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .资源信息 {
+                padding-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .资源操作 {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .资源元数据 {
+                gap: 15px;
+            }
+            
+            .资源选项卡 {
+                padding: 10px 16px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .资源导航容器 {
+                margin-bottom: 20px;
+            }
+            
+            .资源内容 {
+                padding: 15px;
+            }
+            
+            .资源标题 h2 {
+                font-size: 24px;
+            }
+            
+            .资源信息 h3 {
+                font-size: 18px;
+            }
+            
+            .资源操作 {
+                flex-direction: column;
+            }
+            
+            .下载按钮,
+            .查看详情按钮 {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
       
@@ -234,8 +711,280 @@
     
     <!-- 主要内容区域 -->
     <div class="主要内容">
+        <!-- 主内容区域 -->
+        <div class="主内容区">
+            <!-- 资源下载选项卡导航 -->
+            <div class="资源导航容器">
+                <div class="资源导航">
+                    <button class="资源选项卡 活动" data-target="MOD收藏">MOD收藏</button>
+                    <button class="资源选项卡" data-target="整合包下载">整合包下载</button>
+                    <button class="资源选项卡" data-target="历史整合包">历史整合包</button>
+                    <button class="资源选项卡" data-target="整合包客户端">整合包客户端</button>
+                    <button class="资源选项卡" data-target="启动器">启动器</button>
+                </div>
+            </div>
+            
+            <!-- 选项卡内容区域 -->
+            <div class="资源内容">
+                <!-- MOD收藏内容 -->
+                <div class="选项卡内容 活动" id="MOD收藏">
+                    <div class="资源标题">
+                        <h2>🎯 MOD收藏</h2>
+                        <p>HeFong的MOD收藏，包含了许多有用的MOD，欢迎收藏和使用</p>
+                    </div>
+                    <div class="资源列表">
+                        <!-- MOD项目 -->
+                        
+                        <!-- MC百科嵌入式页面 -->
+                        <div class="资源项目 嵌入式页面">
+                            <div class="嵌入内容">
+                                <iframe src="https://center.mcmod.cn/816936/#/favorite/" 
+                                        title="MC百科MOD收藏" 
+                                        width="100%" 
+                                        height="600px" 
+                                        frameborder="0" 
+                                        scrolling="auto"></iframe>
+                            </div>
+                        </div>
+                        
+                        <div class="资源项目">
+                            <div class="资源信息">
+                                <h3>生物增强</h3>
+                                <p>添加新的生物和生态系统，使世界更加生动</p>
+                                <div class="资源元数据">
+                                    <span class="下载数">📥 1.8k</span>
+                                    <span class="版本">🗂️ 1.19.2</span>
+                                    <span class="更新日期">📅 2023-09-30</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <button class="下载按钮">下载</button>
+                                <button class="查看详情按钮">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 整合包下载内容 -->
+                <div class="选项卡内容" id="整合包下载">
+                    <div class="资源标题">
+                        <h2>📦 整合包下载</h2>
+                        <p>完整的Minecraft整合包，拖入启动器即可安装/p>
+                    </div>
+                    <div class="资源列表">
+                        <div class="资源项目 推荐">
+                            <div class="推荐标签">推荐</div>
+                            <div class="资源信息">
+                                <h3>TWD整合包.ZIP</h3>
+                                <p>适用于PCL2、PCL2PE等启动器</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ 1.20.1</span>
+                                    <span class="更新日期">📅 2023-12-10</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <button class="下载按钮">下载</button>
+                                <button class="查看详情按钮">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="资源项目">
+                            <div class="资源信息">
+                                <h3>TWD整合包.mrpack</h3>
+                                <p>适用于HMCL，FCL（手机启动器）</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ 1.20.1</span>
+                                    <span class="更新日期">📅 2023-12-10</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <button class="下载按钮">下载</button>
+                                <button class="查看详情按钮">查看详情</button>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+                
+                <!-- 历史整合包内容 -->
+                <div class="选项卡内容" id="历史整合包">
+                    <div class="资源标题">
+                        <h2>📜 历史整合包</h2>
+                        <p>过往版本的整合包存档，供怀旧玩家使用</p>
+                    </div>
+                    <div class="资源列表">
+
+                        <div class="资源项目">
+                            <div class="资源信息">
+                                <h3>TWD生存整合包 v2.5</h3>
+                                <p>旧版服务器生存整合包</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ 1.18.2</span>
+                                    <span class="更新日期">📅 2023-06-15</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <button class="下载按钮">下载</button>
+                                <button class="查看详情按钮">查看详情</button>
+                            </div>
+                        </div>
+
+                        <div class="资源项目">
+                            <div class="资源信息">
+                                <h3>TWD生存整合包 v2.0</h3>
+                                <p>经典版本服务器整合包</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ 1.17.1</span>
+                                    <span class="更新日期">📅 2023-03-20</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <button class="下载按钮">下载</button>
+                                <button class="查看详情按钮">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 整合包客户端内容 -->
+                <div class="选项卡内容" id="整合包客户端">
+                    <div class="资源标题">
+                        <h2>💻 整合包客户端</h2>
+                        <p>预配置的游戏客户端，无需手动安装模组,解压使用</p>
+                    </div>
+                    <div class="资源列表">
+
+                        <div class="资源项目 推荐">
+                            <div class="推荐标签">推荐</div>
+                            <div class="资源信息">
+                                <h3>TWD官方启动器</h3>
+                                <p>一键安装整合包，自动更新模组</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ v1.5.0</span>
+                                    <span class="更新日期">📅 2023-12-15</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <button class="下载按钮">下载</button>
+                                <button class="查看详情按钮">查看详情</button>
+                            </div>
+                        </div>
+
+                        <div class="资源项目">
+                            <div class="资源信息">
+                                <h3>HMCL整合包客户端</h3>
+                                <p>基于HMCL启动器的整合包客户端</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ v0.5.3</span>
+                                    <span class="更新日期">📅 2023-11-25</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <button class="下载按钮">下载</button>
+                                <button class="查看详情按钮">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 启动器内容 -->
+                <div class="选项卡内容" id="启动器">
+                    <div class="资源标题">
+                        <h2>🚀 启动器</h2>
+                        <p>各种Minecraft启动器下载</p>
+                    </div>
+                    <div class="资源列表">
+                        <div class="资源项目">
+                            <div class="资源信息">
+                                <h3>PCL2启动器</h3>
+                                <p>由龙腾猫跃创作发布，拥有简洁明了的界面和较多功能，广泛被Minecraft玩家使用</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ 最新版</span>
+                                    <span class="更新日期">📅 2023-12-01</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <form action="https://cdn.bbsmc.net/bbsmc/data/YJBkhCZM/versions/ajViXROj/PCL%20%E6%AD%A3%E5%BC%8F%E7%89%88%202.10.9.zip"
+                                    method="get" target="_blank">
+                                    <button type="submit" class="下载按钮">下载</button>
+                                </form>
+                                <form action="https://afdian.com/p/0164034c016c11ebafcb52540025c377"
+                                    method="get" target="_blank">
+                                    <button type="submit" class="查看详情按钮">查看详情</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="资源项目">
+                            <div class="资源信息">
+                                <h3>HMCL启动器</h3>
+                                <p>由黄宇辉创作发布，是一个系统兼容性强、稳定性高的Minecraft启动器</p>
+                                <div class="资源元数据">
+                                    <span class="版本">🗂️ 3.8.0.306</span>
+                                    <span class="更新日期">📅 2025-11-2</span>
+                                </div>
+                            </div>
+                            <div class="资源操作">
+                                <form action="https://glavo.lanzouw.com/ixAZv39ylfng"
+                                    method="get" target="_blank">
+                                    <button type="submit" class="下载按钮">下载</button>
+                                </form>
+                                <form action="https://hmcl.huangyuhui.net/"
+                                    method="get" target="_blank">
+                                    <button type="submit" class="查看详情按钮">查看详情</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧信息展示区 -->
+        <div class="右侧信息区">
+            <!-- 时间信息显示区 -->
+            <div class="信息卡片 时间信息区">
+                <h3>🕒 当前时间</h3>
+                <div class="当前时间" id="当前时间显示">--:--:--</div>
+                <div class="日期信息">
+                    <span id="日期显示">--</span>
+                    <span id="星期显示">星期--</span>
+                </div>
+            </div>
+            
+            <!-- 标题展示区 -->
+            <div class="信息卡片 标题展示区">
+                <h2>TWD服务器整合包仓库</h2>
+                <p>为玩家提供优质的游戏资源和模组支持</p>
+            </div>
+            
+            <!-- 装饰图片区域 -->
+            <div class="信息卡片 装饰图片区域">
+                <img src="TuPian/BG_CS_Abydos_75.jpg" alt="Minecraft服务器装饰图">
+            </div>
+        </div>
     </div>
+    
+    <script>
+        // 资源选项卡切换功能
+        document.querySelectorAll('.资源选项卡').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有选项卡的活动状态
+                document.querySelectorAll('.资源选项卡').forEach(t => t.classList.remove('活动'));
+                // 添加当前选项卡的活动状态
+                this.classList.add('活动');
+                
+                // 获取目标内容ID
+                const targetId = this.getAttribute('data-target');
+                
+                // 隐藏所有内容
+                document.querySelectorAll('.选项卡内容').forEach(content => {
+                    content.classList.remove('活动');
+                });
+                
+                // 显示目标内容
+                document.getElementById(targetId).classList.add('活动');
+            });
+        });
+    </script>
     
     <!-- 页脚 -->
     <footer class="页脚">
@@ -275,6 +1024,41 @@
                 导航链接.classList.remove('激活');
             }
         });
+        
+        // 时间信息更新功能
+        function 更新时间() {
+            const 现在 = new Date();
+            
+            // 获取时间信息
+            const 小时 = 现在.getHours().toString().padStart(2, '0');
+            const 分钟 = 现在.getMinutes().toString().padStart(2, '0');
+            const 秒 = 现在.getSeconds().toString().padStart(2, '0');
+            
+            // 获取日期信息
+            const 年份 = 现在.getFullYear();
+            const 月份 = (现在.getMonth() + 1).toString().padStart(2, '0');
+            const 日期 = 现在.getDate().toString().padStart(2, '0');
+            
+            // 获取星期信息
+            const 星期列表 = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const 星期 = 星期列表[现在.getDay()];
+            
+            // 更新显示
+            if (document.getElementById('当前时间显示')) {
+                document.getElementById('当前时间显示').textContent = `${小时}:${分钟}:${秒}`;
+            }
+            if (document.getElementById('日期显示')) {
+                document.getElementById('日期显示').textContent = `${年份}-${月份}-${日期}`;
+            }
+            if (document.getElementById('星期显示')) {
+                document.getElementById('星期显示').textContent = 星期;
+            }
+        }
+        
+        // 初始更新一次
+        更新时间();
+        // 每秒更新一次时间
+        setInterval(更新时间, 1000);
     </script>
 </body>
 </html>
