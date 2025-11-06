@@ -285,5 +285,117 @@
             }
         });
     </script>
+    <!-- 独立悬浮导航组件 -->
+    <style>
+        /* 悬浮导航按钮样式 */
+        .悬浮导航按钮 {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+        .悬浮导航按钮:hover {
+            background-color: #16a085;
+            transform: scale(1.1);
+        }
+        
+        /* 悬浮导航菜单样式 */
+        .悬浮导航菜单 {
+            display: none;
+            position: fixed;
+            bottom: 86px;
+            right: 20px;
+            background: rgba(26, 42, 58, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            z-index: 9998;
+            width: 200px;
+            overflow: hidden;
+        }
+        .悬浮导航菜单 a {
+            display: block;
+            padding: 12px 16px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        .悬浮导航菜单 a:hover {
+            background-color: rgba(22, 160, 133, 0.3);
+            padding-left: 20px;
+        }
+        
+        /* 媒体查询：仅在尺寸小于758*824时显示 */
+        @media (max-width: 758px) and (max-height: 824px) {
+            .悬浮导航按钮 {
+                display: block;
+            }
+        }
+    </style>
+    
+    <!-- 悬浮导航HTML结构 -->
+    <button class="悬浮导航按钮" id="悬浮按钮">☰</button>
+    <div class="悬浮导航菜单" id="悬浮菜单">
+        <a href="TWDAI.HTML">首页</a>
+        <a href="TWD_JC.html">教程</a>
+        <a href="TWD_GJ.html">工具</a>
+        <a href="TWD_ZY.html">资源下载</a>
+        <a href="ZanZhu.html">联系我们</a>
+    </div>
+    
+    <!-- 悬浮导航JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const 悬浮按钮 = document.getElementById('悬浮按钮');
+            const 悬浮菜单 = document.getElementById('悬浮菜单');
+            
+            // 切换菜单显示/隐藏
+            悬浮按钮.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (悬浮菜单.style.display === 'block') {
+                    悬浮菜单.style.display = 'none';
+                    悬浮按钮.textContent = '☰';
+                } else {
+                    悬浮菜单.style.display = 'block';
+                    悬浮按钮.textContent = '×';
+                }
+            });
+            
+            // 点击菜单链接后关闭菜单
+            悬浮菜单.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    悬浮菜单.style.display = 'none';
+                    悬浮按钮.textContent = '☰';
+                });
+            });
+            
+            // 点击页面其他地方关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!悬浮按钮.contains(e.target) && !悬浮菜单.contains(e.target)) {
+                    悬浮菜单.style.display = 'none';
+                    悬浮按钮.textContent = '☰';
+                }
+            });
+            
+            // 窗口大小变化时检查是否需要隐藏菜单
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 758 || window.innerHeight > 824) {
+                    悬浮菜单.style.display = 'none';
+                    悬浮按钮.textContent = '☰';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
